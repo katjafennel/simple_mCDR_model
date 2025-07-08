@@ -1,6 +1,6 @@
 # README
 
-Code repository accompanying (and extending) scripts used in the article "The Verification Challenge of Marine Carbon Dioxide Removal" by Katja Fennel in Annual Review of Marine Science, Vol. 18, 2026 (https://doi.org/10.1146/annurev-marine-032123-025717). There are separate folders for case 1 (`case_01`) and case 2 (`case_02`) described in the article. The code depends on basic routines for calculating carbonate system parameters in seawater from this repository ENTER LINK.
+Code repository accompanying (and extending) scripts used in the article "The Verification Challenge of Marine Carbon Dioxide Removal" by Katja Fennel in Annual Review of Marine Science, Vol. 18, 2026 (https://doi.org/10.1146/annurev-marine-032123-025717). There are separate folders for case 1 (`case_01`) and case 2 (`case_02`) described in the article. The code depends on basic routines for calculating carbonate system parameters in seawater from this repository (https://doi.org/10.5281/zenodo.15843685).
 
 ## Cases 1.1 and 1.2
 
