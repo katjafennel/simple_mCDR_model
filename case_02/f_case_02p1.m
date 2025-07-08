@@ -1,7 +1,6 @@
-function op = f_case_02(ip)
+function op = f_case_02p1(ip)
 
 big_output = 0;
-
 
 K = ip.K;
 DIC_cf = ip.DIC_cf;    % DIC counterfactual [mmol /m3]
@@ -18,7 +17,7 @@ nt = ip.nt(res);
 t  = dt*[0:nt];         % initilized time vector in seconds
 nx = ip.nx(res);
 dx = ip.dx(res);
-mp = ip.mp(res);
+mp = ip.mp(res);        % midpoint of the domain
 x = dx*([1:nx]-mp);     % space domain in m
 dz = ip.dz;
 

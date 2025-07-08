@@ -4,7 +4,9 @@
 % To make life easy, the surface area is 1 m2.
 % The thickness is set by parameter dz.
 % Thus the volume is 1 x dz m3.
+%------------
 %
+%--------------------------------------------------------------------
 % In case 01.1 the box is in equilibrium with the atmosphere before 
 % the alkalinity perturbation at t=0.
 %--------------------------------------------------------------------
@@ -14,7 +16,7 @@
 
 clear; close all;
 
-plot_output = 0; % yes/no
+plot_output = 1; % yes/no
 
 % INPUT PARAMETERS 
 
@@ -61,7 +63,7 @@ case_01p1.dalk = 100;    % alk perturbation at t=0
 
 if 1
     % 0) call base case
-    op = f2_case_01p1(case_01p1);
+    op = f_case_01p1(case_01p1);
 
     % plot base case
     if plot_output
@@ -69,7 +71,7 @@ if 1
     end
 
     % save output to work on later
-    save('op_case_01/op_case_01p1','op')
+    save('output/op_case_01p1','op')
 end
 
 if 1
@@ -86,44 +88,17 @@ if 1
         sens_01p1_TS(i).S = S_v(i);
         sens_01p1_TS(i).pCO2_air  = f_csys_alk_DIC(T_v(i),S_v(i),sens_01p1_TS(i).alk_cf,sens_01p1_TS(i).DIC_cf);  % [uatm]
         %
-        op_sens_01p1_TS(i) = f2_case_01p1(sens_01p1_TS(i));
+        op_sens_01p1_TS(i) = f_case_01p1(sens_01p1_TS(i));
     end
     
     % save output to work on later
-    save('op_case_01/op_sens_01p1_TS','op_sens_01p1_TS')
+    save('output/op_sens_01p1_TS','op_sens_01p1_TS')
 
     % plot output
     if plot_output
         plot_case_01p1(op_sens_01p1_TS)        
     end
-end %if    
-
-if 0
-    % 2) Sensitivity to DIC and Alk
-    DIC_v = [1900 1900 2200 2200]; % ranges are from Lauvset et al. (2016) for the surface ocean (their figures 3a and 4a) 
-    alk_v = [2050 2400 2050 2400];
-    N = length(T_v);
-    
-    for i=1:N
-        sens_01p1_DICalk(i) = case_01p1; 
-        sens_01p1_DICalk(i).title = 'Sensitivity to DIC and alk';
-        sens_01p1_DICalk(i).legend = {'(DIC,Alk) = (1900,2050)' '(DIC,Alk) = (1900,2400)' '(DIC,Alk) = (2200,2050)' '(DIC,Alk) = (2200,2400)'};
-        sens_01p1_DICalk(i).DIC_cf = DIC_v(i);
-        sens_01p1_DICalk(i).alk_cf = alk_v(i);
-        sens_01p1_DICalk(i).pCO2_air  = f_csys_alk_DIC(case_01p1.T,case_01p1.S,alk_v(i),DIC_v(i));  % [uatm]
-        %
-        op_sens_01p1_DICalk(i) = f2_case_01p1(sens_01p1_DICalk(i));
-    end
-    
-    % save output to work on later
-    save('op_case_01/op_sens_01p1_DICalk','op_sens_01p1_DICalk')
-
-    % plot output
-    if plot_output
-        plot_case_01p1(op_sens_01p1_DICalk)        
-    end
-end %if    
-
+end %if       
 
 if 1
     % 3) Sensitivity to kgas flux parameterization
@@ -138,11 +113,11 @@ if 1
             'McGillis et al. (2004)' 'Ho et al. (2006)' 'Wanninkhof et al. (2009)'};
         sens_01p1_k_param(i).kgas_param = k_param(i);
         %
-        op_sens_01p1_k_param(i) = f2_case_01p1(sens_01p1_k_param(i));
+        op_sens_01p1_k_param(i) = f_case_01p1(sens_01p1_k_param(i));
     end
     
     % save output to work on later
-    save('op_case_01/op_sens_01p1_k_param','op_sens_01p1_k_param')
+    save('output/op_sens_01p1_k_param','op_sens_01p1_k_param')
 
     % plot output
     if plot_output
@@ -161,11 +136,11 @@ if 1
         sens_01p1_U10(i).legend = {'50% avg wind' 'avg wind' '150% avg wind'};
         sens_01p1_U10(i).U10 = U10_v(i);
         %
-        op_sens_01p1_U10(i) = f2_case_01p1(sens_01p1_U10(i));
+        op_sens_01p1_U10(i) = f_case_01p1(sens_01p1_U10(i));
     end
 
     % save output to work on later
-    save('op_case_01/op_sens_01p1_U10','op_sens_01p1_U10')
+    save('output/op_sens_01p1_U10','op_sens_01p1_U10')
     
     % plot output
     if plot_output
@@ -184,11 +159,11 @@ if 1
         sens_01p1_kgas(i).legend = {'0.5x kgas' 'kgas' '1.5x kgas'};
         sens_01p1_kgas(i).fkgas = fkgas(i);
         %
-        op_sens_01p1_kgas(i) = f2_case_01p1(sens_01p1_kgas(i));
+        op_sens_01p1_kgas(i) = f_case_01p1(sens_01p1_kgas(i));
     end
     
     % save output to work on later
-    save('op_case_01/op_sens_01p1_kgas','op_sens_01p1_kgas')
+    save('output/op_sens_01p1_kgas','op_sens_01p1_kgas')
 
     % plot output
     if plot_output
@@ -208,10 +183,10 @@ if 1
         sens_01p1_dz(i).legend = {'0.5x dz' 'dz' '1.5x dz'};
         sens_01p1_dz(i).dz = dz(i);
         %
-        op_sens_01p1_dz(i) = f2_case_01p1(sens_01p1_dz(i));
+        op_sens_01p1_dz(i) = f_case_01p1(sens_01p1_dz(i));
     end
     % save output to work on later
-    save('op_case_01/op_sens_01p1_dz','op_sens_01p1_dz')
+    save('output/op_sens_01p1_dz','op_sens_01p1_dz')
 
     % plot output
     if plot_output
@@ -230,10 +205,10 @@ if 1
         sens_01p1_dalk(i).legend = {'0.5x dalk' 'dalk' '1.5x dalk'};
         sens_01p1_dalk(i).dalk = dalk(i);
         %
-        op_sens_01p1_dalk(i) = f2_case_01p1(sens_01p1_dalk(i));
+        op_sens_01p1_dalk(i) = f_case_01p1(sens_01p1_dalk(i));
     end
     % save output to work on later
-    save('op_case_01/op_sens_01p1_dalk','op_sens_01p1_dalk')
+    save('output/op_sens_01p1_dalk','op_sens_01p1_dalk')
 
     % plot output
     if plot_output
@@ -255,8 +230,6 @@ if 1
 % evolves in time.
 
 % degree to which seawater is under- or oversaturated
-%dpCO2_v = [-200 -100 -50 0 50 100 200];
-%dpCO2_v = [-200 0 200];
 dpCO2_v = [-200 -100 0 100 200];
 N = length(dpCO2_v);
 % build string for legend
@@ -265,16 +238,16 @@ for i=N:-1:1 % going backwards is a trick to preallocate the arrays
 end
 
 for i=N:-1:1 % going backwards is a trick to preallocate the arrays
-    case_01p2(i) = struct(case_01p1); % initialize structire with values from case 01.1
+    case_01p2(i) = struct(case_01p1); % initialize structure with values from case 01.1
     case_01p2(i).DIC_cf = f_csys_alk_pCO2(case_01p2(i).T,case_01p2(i).S,case_01p2(i).alk_cf,case_01p2(i).pCO2_air+dpCO2_v(i));
     case_01p2(i).title = 'Case 01.2 Over-/undersaturated initially by';
     case_01p2(i).legend = legend_str;
     %
-    op_case_01p2(i) = f2_case_01p2(case_01p2(i));
+    op_case_01p2(i) = f_case_01p2(case_01p2(i));
 end
 
 % save output to work on later
-save('op_case_01/op_case_01p2','op_case_01p2')
+save('output/op_case_01p2','op_case_01p2')
 
 % call plotting function
 if plot_output

@@ -1,5 +1,5 @@
 %
-% Case 2 with dispersion
+% Case 2.1 surface ocean with horizontal dispersion
 %
 
 clear; close all
@@ -45,7 +45,7 @@ if 1  % Base case
     disp('%%% Base case')
     disp(' ')
     % Call function for timestepping
-    op_case_02 = f_case_02(case_02);
+    op = f_case_02p1(case_02);
     
     
     % Saving output
@@ -53,7 +53,7 @@ if 1  % Base case
         disp('Take time of saving output.')
         tic
         % save input & output to work on later
-        save('op_case_02','case_02','op_case_02') 
+        save('output/op_case_02','case_02','op') 
         toc
     end
 
@@ -68,7 +68,7 @@ if 1  % Sensitivity to dz
     case_02_halfdz.dalk = case_02.dalk*2; % so that total alk added remains unchanged (it is simply more diluted)
 
     % Call function for timestepping
-    op_case_02_halfdz = f_case_02(case_02_halfdz);
+    op = f_case_02p1(case_02_halfdz);
     
     
     % Saving output
@@ -76,7 +76,7 @@ if 1  % Sensitivity to dz
         disp('Take time of saving output.')
         tic
         % save input & output to work on later
-        save('op_case_02_halfdz','case_02_halfdz','op_case_02_halfdz') 
+        save('output/op_case_02_halfdz','case_02_halfdz','op') 
         toc
     end
 
@@ -90,14 +90,14 @@ if 1  % Sensitivity to K_h (half)
     case_02_halfK.K = case_02.K/2;
 
     % Call function for timestepping
-    op_case_02_halfK = f_case_02(case_02_halfK);
+    op = f_case_02p1(case_02_halfK);
         
     % Saving output
     if save_output
         disp('Take time of saving output.')
         tic
         % save input & output to work on later
-        save('op_case_02_halfK','case_02_halfK','op_case_02_halfK') 
+        save('output/op_case_02_halfK','case_02_halfK','op') 
         toc
     end
 end
@@ -113,17 +113,17 @@ if 1  % Sensitivity to K_h (double)
     case_02_dblK.dt = case_02.dx.*case_02.dx*0.5/K * 0.8;  % timestep in seconds
     %         (dx*dx*0.5)/K is stability criterion threshold; 80% should be safe 
     case_02_dblK.nt = case_02.nt*2;     % number of time steps in simulation
-    case_02_dblK.nx = case_02.nx*2;       % number of horizontal grid points 
+    case_02_dblK.nx = case_02.nx*2;     % number of horizontal grid points 
 
     % Call function for timestepping
-    op_case_02_dblK = f_case_02(case_02_dblK);
+    op = f_case_02p1(case_02_dblK);
     
     % Saving output
     if save_output
         disp('Take time of saving output.')
         tic
         % save input & output to work on later
-        save('op_case_02_dblK','case_02_dblK','op_case_02_dblK') 
+        save('output/op_case_02_dblK','case_02_dblK','op') 
         toc
     end
 
@@ -137,7 +137,7 @@ if 1  % Sensitivity to dalk
     case_02_halfdalk.dalk = case_02.dalk/2;
 
     % Call function for timestepping
-    op_case_02_halfdalk = f_case_02(case_02_halfdalk);
+    op = f_case_02p1(case_02_halfdalk);
     
     
     % Saving output
@@ -145,7 +145,7 @@ if 1  % Sensitivity to dalk
         disp('Take time of saving output.')
         tic
         % save input & output to work on later
-        save('op_case_02_halfdalk','case_02_halfdalk','op_case_02_halfdalk') 
+        save('output/op_case_02_halfdalk','case_02_halfdalk','op') 
         toc
     end
 
@@ -153,7 +153,7 @@ if 1  % Sensitivity to dalk
     case_02_dbldalk.dalk = case_02.dalk*2;
 
     % Call function for timestepping
-    op_case_02_dbldalk = f_case_02(case_02_dbldalk);
+    op = f_case_02p1(case_02_dbldalk);
     
     
     % Saving output
@@ -161,7 +161,7 @@ if 1  % Sensitivity to dalk
         disp('Take time of saving output.')
         tic
         % save input & output to work on later
-        save('op_case_02_dbldalk','case_02_dbldalk','op_case_02_dbldalk') 
+        save('output/op_case_02_dbldalk','case_02_dbldalk','op') 
         toc
     end
 

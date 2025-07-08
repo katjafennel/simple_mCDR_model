@@ -1,7 +1,7 @@
 %
-% Case 2 with dispersion and deep ocean reservoir
+% Case 2.2 ocean with dispersion and a deep ocean reservoir
 %
-% Output naming convention:
+% Local naming convention for output:
 % case_02.2 assumes no vertical gradient in DIC (i.e. DIC_deep = DIC_cf)
 % case_02.3 has vertical DIC gradient (i.e. DIC_deep > DIC_cf_surface)
 % case_02.4 has over- or undersaturated surface DIC
@@ -52,24 +52,21 @@ if 1  % Base case (kv = 0; no vertical DIC gradient; in equilibrium initially)
     disp(' ')
 
     % Call function for timestepping
-    op_case_02p2_kv0 = f_case_02p2(case_02);
-    
+    op = f_case_02p2(case_02);
     
     % Saving output
     if save_output
         disp(' ')
         disp('Take time of saving output.')
         tic
-        % save input & output to work on later
-        %save('op_case_02p2_base','case_02','op') 
-        save('op_case_02p2_kv0','case_02','op_case_02p2_kv0') 
+        % save input & output to work on later 
+        save('output/op_case_02p2_kv0','case_02','op') 
         toc
         disp(' ')
     end
-
 end
 
-if 0  % sensitivity to K_v
+if 1  % sensitivity to K_v
     disp(' ')
     disp('%%% Sensitivity to Kv')
     disp(' ')
@@ -79,7 +76,7 @@ if 0  % sensitivity to K_v
     case_02_kv1em7.Kv = 0.0000001;
 
     % Call function for timestepping
-    op_case_02_kv1em7 = f_case_02p2(case_02_kv1em7);
+    op = f_case_02p2(case_02_kv1em7);
 
     % Saving output
     if save_output
@@ -87,33 +84,33 @@ if 0  % sensitivity to K_v
         disp('Take time of saving output.')
         tic
         % save input & output to work on later
-        save('op_case_02_kv1em7','case_02_kv1em7','op_case_02_kv1em7') 
+        save('output/op_case_02_kv1em7','case_02_kv1em7','op') 
         toc
     end
 
 
-    % case_02_kv2em7 = case_02;
-    % case_02_kv2em7.Kv = 0.0000002;
-    % 
-    % % Call function for timestepping
-    % op = f_case_02p2(case_02_kv2em7);
-    % 
-    % % Saving output
-    % if save_output
-    %     disp(' ')
-    %     disp('Take time of saving output.')
-    %     tic
-    %     % save input & output to work on later
-    %     save('op_case_02p2_kv2em7','case_02_kv2em7','op') 
-    %     toc
-    % end
+    case_02_kv2em7 = case_02;
+    case_02_kv2em7.Kv = 0.0000002;
+
+    % Call function for timestepping
+    op = f_case_02p2(case_02_kv2em7);
+
+    % Saving output
+    if save_output
+        disp(' ')
+        disp('Take time of saving output.')
+        tic
+        % save input & output to work on later
+        save('output/op_case_02p2_kv2em7','case_02_kv2em7','op') 
+        toc
+    end
 
 
     case_02_kv1em6 = case_02;
     case_02_kv1em6.Kv = 0.000001;
 
     % Call function for timestepping
-    op_case_02_kv1em6 = f_case_02p2(case_02_kv1em6);
+    op = f_case_02p2(case_02_kv1em6);
 
     % Saving output
     if save_output
@@ -121,16 +118,16 @@ if 0  % sensitivity to K_v
         disp('Take time of saving output.')
         tic
         % save input & output to work on later
-        save('op_case_02_kv1em6','case_02_kv1em6','op_case_02_kv1em6') 
+        save('output/op_case_02_kv1em6','case_02_kv1em6','op') 
         toc
     end
+
 
     case_02_kv1em5 = case_02;
     case_02_kv1em5.Kv = 0.00001;
 
     % Call function for timestepping
-    op_case_02_kv1em5 = f_case_02p2(case_02_kv1em5);
-
+    op = f_case_02p2(case_02_kv1em5);
 
     % Saving output
     if save_output
@@ -138,14 +135,14 @@ if 0  % sensitivity to K_v
         disp('Take time of saving output.')
         tic
         % save input & output to work on later
-        save('op_case_02_kv1em5','case_02_kv1em5','op_case_02_kv1em5') 
+        save('output/op_case_02_kv1em5','case_02_kv1em5','op') 
         toc
         disp(' ')
     end
 
 end
 
-if 0  % sensitivity to DIC_deep
+if 1  % sensitivity to DIC_deep
     disp(' ')
     disp('%%% Sensitivity to DIC_deep')
     disp(' ')
@@ -155,7 +152,7 @@ if 0  % sensitivity to DIC_deep
     case_02p3_2150.DIC_deep = 2150;
 
     % Call function for timestepping
-    op_case_02p3_2150 = f_case_02p2(case_02p3_2150);
+    op = f_case_02p2(case_02p3_2150);
 
     % Saving output
     if save_output
@@ -163,7 +160,7 @@ if 0  % sensitivity to DIC_deep
         disp('Take time of saving output.')
         tic
         % save input & output to work on later
-        save('op_case_02p3_2150','case_02p3_2150','op_case_02p3_2150') 
+        save('output/op_case_02p3_2150','case_02p3_2150','op') 
         toc
     end
 
@@ -181,7 +178,7 @@ if 0  % sensitivity to DIC_deep
     case_02p3_2250.pCO2_dict = pCO2_dictionary(case_02.T,case_02.S,DIC_min,DIC_max,alk_min,alk_max,del);
 
     % Call function for timestepping
-    op_case_02p3_2250 = f_case_02p2(case_02p3_2250);
+    op = f_case_02p2(case_02p3_2250);
 
     % Saving output
     if save_output
@@ -189,7 +186,7 @@ if 0  % sensitivity to DIC_deep
         disp('Take time of saving output.')
         tic
         % save input & output to work on later
-        save('op_case_02p3_2250','case_02p3_2250','op_case_02p3_2250') 
+        save('output/op_case_02p3_2250','case_02p3_2250','op') 
         toc
     end
 
@@ -224,7 +221,7 @@ if 0  % sensitivity to over- and undersaturation at the surface
         disp('Take time of saving output.')
         tic
         % save input & output to work on later
-        save('op_case_02p4_2250_2150','case_02p4','op') 
+        save('output/op_case_02p4_2250_2150','case_02p4','op') 
         toc
     end
 
@@ -251,10 +248,8 @@ if 0  % sensitivity to over- and undersaturation at the surface
         disp('Take time of saving output.')
         tic
         % save input & output to work on later
-        save('op_case_02p4_2050_1950','case_02p4','op') 
+        save('output/op_case_02p4_2050_1950','case_02p4','op') 
         toc
     end
-
-
 
 end
